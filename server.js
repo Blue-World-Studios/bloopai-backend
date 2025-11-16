@@ -6,10 +6,12 @@ const app = express();
 app.use(cors()); // allow frontend requests
 app.use(express.json());
 
+// Use environment variable for OpenAI key
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY // Railway secret
+  apiKey: process.env.OPENAI_API_KEY
 });
 
+// POST /api/chat endpoint
 app.post("/api/chat", async (req, res) => {
   const { messages } = req.body;
   try {
@@ -24,5 +26,6 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
+// Use Railway port or fallback
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => console.log(`Bloop AI backend running on port ${PORT}`));
